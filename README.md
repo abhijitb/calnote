@@ -20,15 +20,15 @@ A modern React-based calendar note application that combines calendar functional
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
 
-<img src="/screenshots/homepage.png" alt="Homepage" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
+<img src="public/screenshots/calendar-view.png" alt="Calendar View" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
 
-<img src="/screenshots/notes-dashboard.png" alt="Notes Dashboard" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
+<img src="public/screenshots/notes-dashboard.png" alt="Notes Dashboard" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
 
-<img src="/screenshots/calendar-view.png" alt="Calendar View" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
+<img src="public/screenshots/note-editor.png" alt="Note Editor" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
 
-<img src="/screenshots/note-editor.png" alt="Note Editor" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
+<img src="public/screenshots/notes-search.png" alt="Search Functionality" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
 
-<img src="/screenshots/notes-search.png" alt="Search Functionality" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
+<img src="public/screenshots/homepage.png" alt="Homepage" width="45%" style="min-width: 300px; border: 1px solid #ddd; border-radius: 8px;">
 
 </div>
 
