@@ -51,7 +51,7 @@ const SearchHeader = ({ onSearchChange, onFilterChange, resultCount }) => {
   ];
 
   return (
-    <div className="bg-background border-b border-border">
+    <div className="bg-background border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Search Input */}
         <form onSubmit={handleSearchSubmit} className="mb-4">

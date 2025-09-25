@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
-const NoteCard = ({ note, onToggleFavorite, onDelete, onEdit, viewMode = 'grid' }) => {
+const NoteCard = ({ note, onToggleFavorite, onDelete, onEdit, viewMode = 'grid', showCheckbox = false, onCheckboxChange, isChecked }) => {
   const navigate = useNavigate();
   const [showActions, setShowActions] = useState(false);
 
   const handleCardClick = () => {
-    navigate(`/note-editor?id=${note?.id}`);
+    if (!showCheckbox) {
+      navigate(`/note-editor?id=${note?.id}`);
+    }
   };
 
   const handleActionClick = (e, action) => {
@@ -32,7 +34,7 @@ const NoteCard = ({ note, onToggleFavorite, onDelete, onEdit, viewMode = 'grid' 
   if (viewMode === 'list') {
     return (
       <div 
-        className="bg-card border border-border rounded-lg p-4 hover-lift cursor-pointer transition-all duration-200 hover:shadow-md"
+        className={`bg-card border border-border rounded-lg p-4 hover-lift cursor-pointer transition-all duration-200 hover:shadow-md ${showCheckbox ? 'pl-12' : ''}`}
         onClick={handleCardClick}
         onMouseEnter={() => setShowActions(true)}
         onMouseLeave={() => setShowActions(false)}
@@ -40,8 +42,19 @@ const NoteCard = ({ note, onToggleFavorite, onDelete, onEdit, viewMode = 'grid' 
         <div className="flex items-start justify-between">
           <div className="flex-1 min-w-0">
             <div className="flex items-center space-x-2 mb-2">
+              {showCheckbox && (
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={(e) => {
+                    e?.stopPropagation();
+                    onCheckboxChange?.(note?.id);
+                  }}
+                  className="w-4 h-4 text-primary bg-background border-border rounded focus:ring-primary focus:ring-2 absolute left-4 top-1/2 transform -translate-y-1/2 z-10"
+                />
+              )}
               <h3 className="text-lg font-semibold text-foreground truncate">
-                {note?.title}
+                {truncateText(note?.title, 60)}
               </h3>
               {note?.isFavorite && (
                 <Icon name="Star" size={16} className="text-accent fill-current" />
@@ -61,7 +74,7 @@ const NoteCard = ({ note, onToggleFavorite, onDelete, onEdit, viewMode = 'grid' 
               )}
             </div>
           </div>
-          <div className={`flex items-center space-x-1 transition-opacity duration-200 ${
+          <div className={`flex items-center space-x-1 transition-opacity duration-200 flex-shrink-0 ${
             showActions ? 'opacity-100' : 'opacity-0'
           }`}>
             <Button
@@ -100,16 +113,29 @@ const NoteCard = ({ note, onToggleFavorite, onDelete, onEdit, viewMode = 'grid' 
 
   return (
     <div 
-      className="bg-card border border-border rounded-lg p-4 hover-lift cursor-pointer transition-all duration-200 hover:shadow-md group"
+      className={`bg-card border border-border rounded-lg p-4 hover-lift cursor-pointer transition-all duration-200 hover:shadow-md group ${showCheckbox ? 'pl-12' : ''}`}
       onClick={handleCardClick}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
       <div className="flex items-start justify-between mb-3">
-        <h3 className="text-lg font-semibold text-foreground truncate flex-1 mr-2">
-          {note?.title}
-        </h3>
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-2 min-w-0">
+          {showCheckbox && (
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={(e) => {
+                e?.stopPropagation();
+                onCheckboxChange?.(note?.id);
+              }}
+              className="w-4 h-4 text-primary bg-background border-border rounded focus:ring-primary focus:ring-2 absolute left-4 top-1/2 transform -translate-y-1/2 z-10"
+            />
+          )}
+          <h3 className="text-lg font-semibold text-foreground truncate flex-1 mr-2">
+            {truncateText(note?.title, 30)}
+          </h3>
+        </div>
+        <div className="flex items-center space-x-1 flex-shrink-0">
           {note?.isFavorite && (
             <Icon name="Star" size={16} className="text-accent fill-current" />
           )}

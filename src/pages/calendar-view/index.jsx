@@ -12,8 +12,8 @@ import Button from '../../components/ui/Button';
 const CalendarView = () => {
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [showNotesPanel, setShowNotesPanel] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showNotesPanel, setShowNotesPanel] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [viewMode, setViewMode] = useState('month');
   const [filters, setFilters] = useState({

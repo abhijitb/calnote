@@ -133,16 +133,6 @@ const RichTextEditor = ({
           data-placeholder={placeholder}
           suppressContentEditableWarning={true}
         />
-        
-        {/* Placeholder */}
-        {!content && (
-          <div 
-            className="absolute top-4 left-4 text-muted-foreground pointer-events-none select-none"
-            style={{ fontSize: '16px' }}
-          >
-            {placeholder}
-          </div>
-        )}
       </div>
 
       <style jsx>{`
@@ -150,6 +140,7 @@ const RichTextEditor = ({
           content: attr(data-placeholder);
           color: hsl(var(--muted-foreground));
           pointer-events: none;
+          display: block; /* Ensure it takes up space */
         }
         
         [contenteditable] strong,

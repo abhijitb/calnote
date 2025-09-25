@@ -6,6 +6,7 @@ import Icon from '../../components/AppIcon';
 import RichTextEditor from './components/RichTextEditor';
 import AutoSaveIndicator from './components/AutoSaveIndicator';
 import NoteSidebar from './components/NoteSidebar';
+import { getNotes, addNote, updateNote } from '../../utils/localStorage';
 
 const NoteEditor = () => {
   const navigate = useNavigate();
@@ -32,8 +33,8 @@ const NoteEditor = () => {
     tags: existingNote?.tags || [],
     category: existingNote?.category || '',
     isFavorite: existingNote?.isFavorite || false,
-    createdAt: existingNote?.createdAt || new Date()?.toISOString(),
-    modifiedAt: existingNote?.modifiedAt || new Date()?.toISOString()
+    createdAt: existingNote?.createdAt || new Date(),
+    modifiedAt: existingNote?.modifiedAt || new Date()
   });
 
   // Mock data for suggestions
@@ -54,67 +55,39 @@ const NoteEditor = () => {
     setSaveStatus('saving');
     
     // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 500));
     
     try {
-      // Mock save operation
+      // Create updated note object
       const updatedNote = {
         ...noteData,
         title,
         content,
-        modifiedAt: new Date()?.toISOString()
+        modifiedAt: new Date()
       };
       
-      // In real app, this would be an API call
-      console.log('Saving note:', updatedNote);
+      // Save to localStorage
+      if (isEditMode) {
+        updateNote(updatedNote);
+      } else {
+        addNote(updatedNote);
+      }
       
       setNoteData(updatedNote);
-      setLastSaved(new Date()?.toISOString());
+      setLastSaved(new Date());
       setSaveStatus('saved');
       setHasUnsavedChanges(false);
     } catch (error) {
       setSaveStatus('error');
       console.error('Save failed:', error);
     }
-  }, [title, content, noteData, hasUnsavedChanges]);
+  }, [title, content, noteData, hasUnsavedChanges, isEditMode]);
 
-  // Auto-save timer
-  useEffect(() => {
-    if (hasUnsavedChanges) {
-      const timer = setTimeout(autoSave, 2000); // Auto-save after 2 seconds of inactivity
-      return () => clearTimeout(timer);
-    }
-  }, [hasUnsavedChanges, autoSave]);
-
-  // Handle title change
-  const handleTitleChange = (e) => {
-    setTitle(e?.target?.value);
-    setHasUnsavedChanges(true);
-    setSaveStatus('unsaved');
-  };
-
-  // Handle content change
-  const handleContentChange = (newContent) => {
-    setContent(newContent);
-    setHasUnsavedChanges(true);
-    setSaveStatus('unsaved');
-  };
-
-  // Handle word count update
-  const handleWordCountChange = (count) => {
-    setWordCount(count);
-  };
-
-  // Handle note metadata update
-  const handleNoteUpdate = (updates) => {
-    setNoteData(prev => ({ ...prev, ...updates }));
-    setHasUnsavedChanges(true);
-    setSaveStatus('unsaved');
-  };
-
-  // Manual save
+  // Manual save and redirect
   const handleSave = async () => {
     await autoSave();
+    // Redirect to notes dashboard after successful save
+    navigate('/notes-dashboard');
   };
 
   // Handle cancel/back

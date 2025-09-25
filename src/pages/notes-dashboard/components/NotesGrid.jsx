@@ -156,27 +156,16 @@ const NotesGrid = ({
       }`}>
         {notes?.map((note) => (
           <div key={note?.id} className="relative">
-            {/* Selection Checkbox */}
-            <div className="absolute top-2 left-2 z-10">
-              <input
-                type="checkbox"
-                checked={selectedNotes?.has(note?.id)}
-                onChange={() => handleSelectNote(note?.id)}
-                className="w-4 h-4 text-primary bg-background border-border rounded focus:ring-primary focus:ring-2"
-                onClick={(e) => e?.stopPropagation()}
-              />
-            </div>
-            
-            {/* Note Card */}
-            <div className={selectedNotes?.has(note?.id) ? 'ring-2 ring-primary rounded-lg' : ''}>
-              <NoteCard
-                note={note}
-                viewMode={viewMode}
-                onToggleFavorite={onToggleFavorite}
-                onDelete={onDelete}
-                onEdit={onEdit}
-              />
-            </div>
+            <NoteCard
+              note={note}
+              viewMode={viewMode}
+              onToggleFavorite={onToggleFavorite}
+              onDelete={onDelete}
+              onEdit={onEdit}
+              showCheckbox={selectedNotes?.size > 0}
+              isChecked={selectedNotes?.has(note?.id)}
+              onCheckboxChange={handleSelectNote}
+            />
           </div>
         ))}
       </div>

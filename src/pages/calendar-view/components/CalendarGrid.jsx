@@ -52,9 +52,9 @@ const CalendarGrid = ({ currentDate, onDateSelect, notesData, selectedDate }) =>
         <div
           key={day}
           onClick={() => onDateSelect(date)}
-          className={`p-2 h-24 border border-border cursor-pointer transition-all duration-200 hover:bg-muted/50 ${
+          className={`p-2 h-24 border border-border cursor-pointer transition-all duration-200 hover:bg-muted/50 relative ${
             isSelected ? 'bg-primary/10 border-primary' : 'bg-background'
-          } ${isToday ? 'ring-2 ring-accent' : ''}`}
+          } ${isToday ? 'ring-2 ring-accent z-10' : ''}`}
         >
           <div className="flex flex-col h-full">
             <div className={`text-sm font-medium mb-1 ${
@@ -120,9 +120,9 @@ const CalendarGrid = ({ currentDate, onDateSelect, notesData, selectedDate }) =>
             <div
               key={index}
               onClick={() => onDateSelect(date)}
-              className={`p-4 border border-border rounded-lg cursor-pointer transition-all duration-200 hover:bg-muted/50 ${
+              className={`p-4 border border-border rounded-lg cursor-pointer transition-all duration-200 hover:bg-muted/50 relative ${
                 isSelected ? 'bg-primary/10 border-primary' : 'bg-background'
-              } ${isToday ? 'ring-2 ring-accent' : ''}`}
+              } ${isToday ? 'ring-2 ring-accent z-10' : ''}`}
             >
               <div className="text-center mb-3">
                 <div className="text-sm text-muted-foreground">
