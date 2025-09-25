@@ -102,7 +102,7 @@ const RichTextEditor = ({
   return (
     <div className="flex flex-col h-full">
       {/* Toolbar */}
-      <div className="mb-4">
+      <div className="mb-3">
         <EditorToolbar
           onBold={() => executeCommand('bold')}
           onItalic={() => executeCommand('italic')}
@@ -118,11 +118,11 @@ const RichTextEditor = ({
       </div>
 
       {/* Editor */}
-      <div className="flex-1 relative">
+      <div className="flex-1 min-h-0 relative">
         <div
           ref={editorRef}
           contentEditable
-          className="w-full h-full min-h-[400px] p-4 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent resize-none text-foreground leading-relaxed"
+          className="w-full h-full p-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent resize-none text-foreground leading-relaxed editor-content"
           style={{
             fontFamily: 'Inter, sans-serif',
             fontSize: '16px',
@@ -135,49 +135,49 @@ const RichTextEditor = ({
         />
       </div>
 
-      <style jsx>{`
-        [contenteditable]:empty:before {
+      <style>{`
+        .editor-content:empty:before {
           content: attr(data-placeholder);
           color: hsl(var(--muted-foreground));
           pointer-events: none;
-          display: block; /* Ensure it takes up space */
+          display: block;
         }
         
-        [contenteditable] strong,
-        [contenteditable] b {
+        .editor-content strong,
+        .editor-content b {
           font-weight: 600;
         }
         
-        [contenteditable] em,
-        [contenteditable] i {
+        .editor-content em,
+        .editor-content i {
           font-style: italic;
         }
         
-        [contenteditable] u {
+        .editor-content u {
           text-decoration: underline;
         }
         
-        [contenteditable] ul {
+        .editor-content ul {
           list-style-type: disc;
           margin-left: 20px;
           margin-bottom: 10px;
         }
         
-        [contenteditable] ol {
+        .editor-content ol {
           list-style-type: decimal;
           margin-left: 20px;
           margin-bottom: 10px;
         }
         
-        [contenteditable] li {
+        .editor-content li {
           margin-bottom: 5px;
         }
         
-        [contenteditable] p {
+        .editor-content p {
           margin-bottom: 10px;
         }
         
-        [contenteditable]:focus {
+        .editor-content:focus {
           outline: none;
         }
       `}</style>

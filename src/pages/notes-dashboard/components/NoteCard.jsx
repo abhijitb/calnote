@@ -9,7 +9,7 @@ const NoteCard = ({ note, onToggleFavorite, onDelete, onEdit, viewMode = 'grid',
 
   const handleCardClick = () => {
     if (!showCheckbox) {
-      navigate(`/note-editor?id=${note?.id}`);
+      navigate('/note-editor', { state: { note } });
     }
   };
 

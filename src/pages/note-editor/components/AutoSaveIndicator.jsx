@@ -12,7 +12,7 @@ const AutoSaveIndicator = ({
         return {
           icon: 'Loader2',
           text: 'Saving...',
-          className: 'text-warning animate-spin',
+          className: 'text-warning',
           bgColor: 'bg-warning/10'
         };
       case 'saved':

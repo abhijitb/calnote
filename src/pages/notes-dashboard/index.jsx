@@ -146,7 +146,10 @@ const NotesDashboard = () => {
   };
 
   const handleEditNote = (noteId) => {
-    navigate(`/note-editor?id=${noteId}`);
+    const noteToEdit = notes.find(note => note.id === noteId);
+    if (noteToEdit) {
+      navigate('/note-editor', { state: { note: noteToEdit } });
+    }
   };
 
   const handleBulkAction = (action, noteIds) => {

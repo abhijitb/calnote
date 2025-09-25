@@ -28,12 +28,17 @@ const NotesPanel = ({ selectedDate, notes, onClose }) => {
   };
 
   const handleEditNote = (noteId) => {
-    navigate(`/note-editor?id=${noteId}`);
+    // Find the note in the notes array
+    const noteToEdit = notes.find(note => note.id === noteId);
+    if (noteToEdit) {
+      navigate('/note-editor', { state: { note: noteToEdit } });
+    }
   };
 
   const handleCreateNote = () => {
     const dateStr = selectedDate?.toISOString()?.split('T')?.[0];
-    navigate(`/note-editor?date=${dateStr}`);
+    // For creating a new note, we can pass the date as state
+    navigate('/note-editor', { state: { date: dateStr } });
   };
 
   return (

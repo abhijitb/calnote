@@ -57,10 +57,10 @@ const NoteSidebar = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 w-80 bg-background border-l border-border shadow-lg z-40 overflow-y-auto lg:relative lg:w-72">
-      <div className="p-4">
+    <div className="h-full flex flex-col bg-background border-border">
+      <div className="p-3 flex-1 overflow-y-auto flex flex-col min-h-0">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-3">
           <h3 className="text-lg font-semibold text-foreground">Note Details</h3>
           <Button
             variant="ghost"
@@ -73,7 +73,7 @@ const NoteSidebar = ({
         </div>
 
         {/* Favorite Toggle */}
-        <div className="mb-6">
+        <div className="mb-3">
           <Checkbox
             label="Mark as favorite"
             description="Add to your favorites collection"
@@ -83,8 +83,8 @@ const NoteSidebar = ({
         </div>
 
         {/* Category Selection */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-foreground mb-2">
+        <div className="mb-3">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Category
           </label>
           <div className="relative">
@@ -93,7 +93,7 @@ const NoteSidebar = ({
               placeholder="Enter category..."
               value={category}
               onChange={(e) => handleCategoryChange(e?.target?.value)}
-              className="mb-2"
+              className="mb-1"
             />
             {category && filteredCategorySuggestions?.length > 0 && (
               <div className="absolute top-full left-0 right-0 bg-popover border border-border rounded-md shadow-lg z-10 max-h-32 overflow-y-auto">
@@ -112,13 +112,13 @@ const NoteSidebar = ({
         </div>
 
         {/* Tags Section */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-foreground mb-2">
+        <div className="mb-3 flex-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Tags
           </label>
           
           {/* Existing Tags */}
-          <div className="flex flex-wrap gap-2 mb-3">
+          <div className="flex flex-wrap gap-2 mb-2">
             {tags?.map((tag, index) => (
               <span
                 key={index}
@@ -171,7 +171,7 @@ const NoteSidebar = ({
         </div>
 
         {/* Note Metadata */}
-        <div className="space-y-3 text-sm text-muted-foreground">
+        <div className="space-y-2 text-sm text-muted-foreground pt-3 border-t border-border">
           <div className="flex items-center gap-2">
             <Icon name="Calendar" size={14} />
             <span>Created: {new Date(noteData.createdAt || Date.now())?.toLocaleDateString()}</span>
